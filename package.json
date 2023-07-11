@@ -6,8 +6,14 @@
   "engines": {
     "vscode": "^1.80.0"
   },
+  "repository":"https://github.com/newnight/vscode-compare-with-same-structure",
   "categories": [
     "Other"
+  ],
+  "keywords": [
+    "Compare",
+    "Kaleidoscope",
+    "newnight"
   ],
   "publisher": "newnight",
   "activationEvents": [],
@@ -63,6 +69,8 @@
     ]
   },
   "scripts": {
+    "package": "vsce package --yarn --no-dependencies",
+    "publish": "yarn run package && vsce publish",
     "vscode:prepublish": "yarn run compile",
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
