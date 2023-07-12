@@ -10,6 +10,7 @@
 暂未测试
 
 ## Extension Settings
-TBD
+`diffToolPath`: 对比工具的绝对路径
+`diffLists`: 需要对比的目录结构,`name` 路径的别名 ,`path` 绝对路径
 
 **Enjoy!**

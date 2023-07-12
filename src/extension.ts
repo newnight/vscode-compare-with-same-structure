@@ -56,6 +56,10 @@ export function activate(context: vscode.ExtensionContext) {
 					return; 
 				} 
 				let targetUri: string = path.replace(sourceUri, selection.description || '');
+				if (targetUri===path) {
+					vscode.window.showErrorMessage('There is no directory that needs to be compared: source and target are consistent.');
+					return;
+				}
 				let cmd = `${diffToolPath} "${path}" "${targetUri}"`;
 				console.log(cmd);
 				child_process.exec(cmd,(exception, stdout, stderr) => {
