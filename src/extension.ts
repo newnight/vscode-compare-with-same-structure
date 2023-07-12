@@ -41,6 +41,8 @@ export function activate(context: vscode.ExtensionContext) {
 			let items: vscode.QuickPickItem[] = []; 
 
 			diffLists.forEach((diffList: DiffList) => { 
+				diffList.path = diffList.path.charAt(-1) === '/' ? diffList.path : diffList.path + '/';
+				console.log(diffList.path);
 				if (path.indexOf(diffList.path)>=0) {
 					sourceUri = diffList.path;
 				} else if (fs.existsSync(diffList.path)) {
