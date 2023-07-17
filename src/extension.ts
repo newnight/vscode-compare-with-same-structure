@@ -42,6 +42,7 @@ export function activate(context: vscode.ExtensionContext) {
 
 			diffLists.forEach((diffList: DiffList) => { 
 				diffList.path = diffList.path.charAt(-1) === '/' ? diffList.path : diffList.path + '/';
+				diffList.path = diffList.path.replace('//','/');
 				console.log(diffList.path);
 				if (path.indexOf(diffList.path)>=0) {
 					sourceUri = diffList.path;
