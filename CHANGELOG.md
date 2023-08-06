@@ -15,3 +15,5 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 - bug fix
 ## [1.0.3~1.0.4]
 - bug fix: Compatible with Windows paths
+## [1.0.5]
+- add vscode,if does't install other difftool

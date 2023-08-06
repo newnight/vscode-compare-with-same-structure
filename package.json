@@ -2,7 +2,7 @@
   "name": "diffwith",
   "displayName": "Compare with same structure folder",
   "description": "Use bcompare or Kaleidoscope to compare with same structure folder ",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "engines": {
     "vscode": "^1.80.0"
   },
