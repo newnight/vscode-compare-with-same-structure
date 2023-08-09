@@ -15,7 +15,7 @@ const { diffToolPath,diffLists} = vscode.workspace.getConfiguration('newnight');
 // Your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
 	if (!fs.existsSync(diffToolPath)) {
-		vscode.window.showErrorMessage('Difftool is not available, please check if the path is correct,will try to using vscode built-in comparison');
+		// vscode.window.showErrorMessage('Difftool is not available, please check if the path is correct,will try to using vscode built-in comparison');
 		usVscode=true;
 	}
 	var sourceUri:string;
@@ -41,13 +41,17 @@ export function activate(context: vscode.ExtensionContext) {
 			vscode.window.showErrorMessage('There is no source Uri to compare');
 			return;
 		}
+		if(usVscode){
+			currentPath=normalize(currentPath);
+		}else{
+			currentPath=normalize(currentPath)+sep;
+		}
 		
-		currentPath=normalize(currentPath)+sep;
 		currentPath=upperPath(currentPath);
 		let items: vscode.QuickPickItem[] = []; 
 
 		diffLists.forEach((diffList: DiffList) => { 
-			diffList.path = upperPath(normalize(diffList.path+sep));
+			diffList.path = upperPath(normalize( usVscode?diffList.path:diffList.path+sep));
 			if (currentPath.includes(diffList.path)) {
 				sourceUri = diffList.path;
 			} else if (fs.existsSync(diffList.path)) {
@@ -72,8 +76,7 @@ export function activate(context: vscode.ExtensionContext) {
 				const leftUri = vscode.Uri.file ( currentPath ),
 				rightUri = vscode.Uri.file ( targetUri ),
 				leftName = basename ( currentPath ),
-				rightName = basename ( targetUri ),
-				title = ( leftName !== rightName ) ? `${leftName} ↔ ${rightName}` : `${leftName} (${currentPath}) ↔ ${rightName} (${targetUri})`;
+				title = `Diff ${leftName} `;
 				return vscode.commands.executeCommand ( 'vscode.diff', leftUri, rightUri, title );
 			}else{
 				exec(`${diffToolPath} "${currentPath}" "${targetUri}"`,(exception, stdout, stderr) => {
