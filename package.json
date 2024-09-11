@@ -2,15 +2,15 @@
   "name": "diffwith",
   "displayName": "Compare with same structure folder",
   "description": "Use bcompare or Kaleidoscope to compare with same structure folder ",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "engines": {
     "vscode": "^1.80.0"
   },
-  "repository":"https://github.com/newnight/vscode-compare-with-same-structure",
+  "repository": "https://github.com/newnight/vscode-compare-with-same-structure",
   "categories": [
     "Other"
   ],
-  "preview": false,
+  "preview": true,
   "keywords": [
     "Compare",
     "Kaleidoscope",
@@ -41,29 +41,33 @@
         }
       ]
     },
-    "configuration":[
+    "configuration": [
       {
         "title": "newnight",
-        "description":"Compare with same structure folder",
+        "description": "Compare with same structure folder",
         "properties": {
           "newnight.diffToolPath": {
             "type": "string",
             "default": "/usr/local/bin/bcompare",
-            "description": "Diff tool path. Bcompare or Kaleidoscope are supported"
+            "description": "Diff tool path. Bcompare or Kaleidoscope are supported, default is vscode."
           },
           "newnight.diffLists": {
             "type": "array",
             "default": [
               {
-                "name":"dev",
-                "path":"~/dev"
+                "name": "dev",
+                "path": "~/dev",
+                "updateBeforeDiff":false,
+                "updateCommand": ""
               },
               {
-                "name":"rc",
-                "path":"~/rc"
+                "name": "rc",
+                "path": "~/rc",
+                "updateBeforeDiff": false,
+                "updateCommand": ""
               }
             ],
-            "description": "Diff list with same structure"
+            "description": "Diff list with same structure, `updateBeforeDiff`: Whether to update the file first before compare, need setup the path of update command.`updateCommand`:If you need a space after the command, please configure the space in the command. e.g. 1. `/usr/local/bin/svn up --accept postpone ` 2.`open snailsvn://svn-update`"
           }
         }
       }
@@ -80,16 +84,16 @@
     "test": "node ./out/test/runTest.js"
   },
   "devDependencies": {
-    "@types/vscode": "^1.80.0",
     "@types/glob": "^8.1.0",
     "@types/mocha": "^10.0.1",
     "@types/node": "20.2.5",
+    "@types/vscode": "^1.80.0",
     "@typescript-eslint/eslint-plugin": "^5.59.8",
     "@typescript-eslint/parser": "^5.59.8",
+    "@vscode/test-electron": "^2.3.2",
     "eslint": "^8.41.0",
     "glob": "^8.1.0",
     "mocha": "^10.2.0",
-    "typescript": "^5.1.3",
-    "@vscode/test-electron": "^2.3.2"
+    "typescript": "^5.1.3"
   }
 }
